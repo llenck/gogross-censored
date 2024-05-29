@@ -1,0 +1,272 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+@import url('https://fonts.cdnfonts.com/css/red-hat-display');
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Red Hat Display', sans-serif;
+}
+
+body {
+  display: flex;
+}
+
+.header {
+  width: 100%;
+  padding: 0.5em 0 0.5em 0;
+}
+
+.container h2{
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  font-family: "DM Sans", sans-serif;
+  font-weight: bold;
+  color: #161a30;
+  margin: 0;
+}
+
+.header h2{
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  font-family: "DM Sans", sans-serif;
+  font-weight: bold;
+  color: #161a30;
+  margin: 0;
+}
+
+.container h4{
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  font-family: "DM Sans", sans-serif;
+  font-weight: thin;
+  color: #161a30;
+}
+
+.header h4{
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  padding: 0 1rem;
+  font-family: "DM Sans", sans-serif;
+  font-weight: thin;
+  color: #161a30;
+}
+
+input {
+  border-radius: 15px;
+  border: none;
+  padding: 0.2rem;
+}
+
+input[type="submit"] {
+  background-color: #161a30;
+  font-weight: bold;
+  border: none;
+  padding: 1% 4%;
+}
+
+/* ---- Sidebar-Styles ----*/
+
+.sidebar {
+  position:fixed;
+  top:0;
+  left:0;
+  width: 108px;
+  min-width: 108px;
+  height: 100vh; /* 100% der Viewport-Höhe */
+  padding: 10px 27.2px;
+  color: #fff;
+  overflow-y: auto;
+  transition: all 0.5s linear; /* Animationseffekt, wenn sich die Breite des Containers ändert */
+  background: #161a30;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar:hover {
+  width: 250px;
+  min-width: 250px;
+  transition: all 0.5s;
+}
+
+.icon {
+  height: 20%;
+  padding: 16px;
+  margin: 1rem 0;
+  display: inline-block;
+} 
+
+img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  border-radius: 20px;
+}
+
+.sidebar .icon img {
+  width: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.sidebar:hover .icon img {
+  opacity: 1;
+}
+
+.menu {
+  flex: 1;
+  position: relative; /* Positionierung relativ zu Elementen */
+  list-style: none; /* Entfernt die Aufzählungszeichen */
+  padding: 0;
+}
+
+.menu li:last-child {
+  position: absolute;
+  bottom: 0;
+  width: 100%; /* Volle Breite */
+} 
+
+.sidebar li {
+  padding: 1rem; /* Abstand zwischen den Menüpunkten */
+  margin: 8px 0; /* Grauer Hintergrundbreite von dem ausgewählten Element */
+  border-radius: 8px;
+  transition: all 0.5s ease-out;
+}
+
+.sidebar li:hover,
+.active {
+  /* Menüpunkt, der gerade ausgewählt ist */
+  background-color: #e0e0e058;
+}
+
+.sidebar a {
+  color: #fff;
+  font-size: 15px;
+  text-decoration: none;
+  display: flex; /* Elemente in einer Zeile anordnen */
+  align-items: center; /* Vertikale Ausrichtung */
+  gap: 1.5rem; /* 1.5rem = 24px Abstand zwischen dem Icon und Text*/
+}
+
+.sidebar a span {
+  overflow: hidden; /* Versteckt den Text, der über die Breite des Containers hinausgeht */
+}
+
+.sidebar a i {
+  font-size: 1.2rem;
+}
+
+.sidebar .menu li a span {
+  white-space: nowrap;
+}
+
+.layout {
+  padding-left: 0.5rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  transition: all 0.5s ease-out; 
+}
+
+.container{
+  position: relative;
+}
+
+span {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@media only screen and (max-width: 768px) {
+  .body {
+    flex-direction: column; /* Stack items in a column */
+  }
+
+  .container{
+    margin-bottom: 105px; /* Add margin bottom to prevent content from being hidden behind the navbar */
+  }
+  .layout{
+    position: fixed; /* Ändere die Position auf "fixed" */
+    top: calc(100vh - 105px);/* Set top to the height of the screen minus 105px */
+    left: 0;
+    width: 100%; /* Ändere die Breite auf 100% */
+    height: 105px; /* Höhe der Sidebar */
+    border-radius: 0; /* Setze border-radius zurück */
+    display: flex; /* Flexbox-Container */
+    flex-direction: row;
+    justify-content: space-between; /* Elemente werden mit gleichem Abstand verteilt */
+    padding: 0 27.2px; /* Padding anpassen */
+    align-items: center;
+    z-index: 1;
+  }
+
+  .sidebar {
+    top: calc(100vh - 105px);/* Set top to the height of the screen minus 105px */
+    left: 0;
+    width: 100%; /* Ändere die Breite auf 100% */
+    height:105px; /* Höhe der Sidebar */
+    border-radius: 0; /* Setze border-radius zurück */
+    display: flex; /* Flexbox-Container */
+    flex-direction: row;
+    justify-content: space-between; /* Elemente werden mit gleichem Abstand verteilt */
+    padding: 0 27.2px; /* Padding anpassen */
+    align-items: center;
+    z-index: 2;
+  }
+  
+  .sidebar:hover {
+    width: 100%; /* Change the width for smaller screens */
+    transition: none; /* Disable the transition animation */
+  }
+  
+  .icon{
+    display: none; /* Das GoGrossLogo aus der NavBar*/
+  }
+
+  .menu {
+    height: 100%;
+    display: flex; /* Flexbox-Container */
+    list-style: none; /* Aufzählungspunkte entfernen */
+    margin: 0; /* Äußeren Abstand entfernen */
+    padding: 0; /* Inneren Abstand entfernen */
+    justify-content: space-between; /* Zentriere die Elemente horizontal */
+    align-items: center;
+    width: 75%; /* 75% of the width */
+  }
+
+  .menu li {
+    margin-right: 15px; /* Abstand zwischen den Elementen */
+    width: 100px;
+  }
+
+  .menu li:last-child {
+    position: relative; /* Positionierung auf relative zurücksetzen */
+    bottom: auto; /* Zurücksetzen der bottom-Eigenschaft */
+    left: auto; /* Zurücksetzen der left-Eigenschaft */
+    width: auto; /* Zurücksetzen der Breite */
+  }
+
+  .menu a{
+    flex-direction: column; /* icons als reihe anzeigen*/
+  }
+
+  .menu a span{
+    display: none; /* Iconbeschreibung weg*/
+  }
+  .separator a span{
+    display: none;
+  }
+  .logout{
+    position: relative; /* Logout Abstand anpassen*/
+    bottom: auto;
+  }
+}

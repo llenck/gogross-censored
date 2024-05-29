@@ -1,0 +1,45 @@
+{% extends 'teacher/base.html' %}
+{% block CDN %}
+<link rel="stylesheet" href=../../static/css/teacher/iban_change.css/>
+{% endblock %}
+
+{% block title %}IBAN change{% endblock %}
+
+{% block content %}
+<div class="main-content">
+    <div class="header">
+        <h2>Administration - Change IBAN</h2>
+    </div>
+    <div class="vendor">
+        <p id="old_iban">Your current IBAN: {{ iban["iban"] }}</p>
+    </div>
+
+    <form action="" method="post" id="vendor-iban-change">
+        <!-- Vendor IBAN -->
+        <div class="input-group mb-3">
+            <span class="input-group-text" >IBAN</span>
+            <input
+                    type="text"
+                    id="iban"
+                    class="form-control"
+                    placeholder="Your new IBAN"
+                    pattern="[a-zA-Z0-9]+"
+                    title="No special characters allowed"
+                    required
+            />
+        </div>
+
+        <!-- Buttons -->
+        <div class="submit-cancel">
+            <span>
+              <button id="cancel-button">Cancel</button>
+            </span>
+            <span>
+              <button id="submit-button" type="submit">Submit</button>
+            </span>
+        </div>
+    </form>
+</div>
+
+<script src="../../static/javascript/teacher/iban_change.js"></script>
+{% endblock %}

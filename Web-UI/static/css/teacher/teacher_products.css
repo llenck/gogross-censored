@@ -1,0 +1,257 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #B6BBC4;
+    font-size: 20px;
+    color: #161A30;
+}
+
+/*----------Header------------ */
+.header {
+    width: 100%;
+    padding: 0.5em 0 0.5em 0;
+}
+
+.header h2 {
+    display: inline-block;
+    color: #161A30;
+    margin: 0;
+    font-family: "DM Sans", sans-serif;
+    font-weight: bold;
+}
+
+.content {
+    width: 100%;
+}
+
+.header select {
+    border-radius: 20px;
+    width: auto ;
+    height: 2em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    margin-left: 1.2%;
+    margin-right: 2.5%;
+    text-align-last: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    background-color: white;
+} 
+
+.header select:hover {
+    background-color: #d2d2d2;
+    transition: 0.5s;
+}
+
+/*----------Buttons------------ */
+
+.buttons {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1em 0 0.5em 0;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .buttons > * {
+    flex: 1;
+    /* max-width: 300px; 
+  } */
+  
+  .buttons button, .buttons select, .buttons form .exportBtn  {
+    border-radius: 20px;
+    text-align-last: center;
+    padding: 0.2em 0.5em 0.2em 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: 2.5%;
+    width: auto;
+    white-space: nowrap;
+    height: 2em;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    background-color: white;
+  }
+
+  .buttons button:hover, .buttons select:hover {
+    background-color: #d2d2d2;
+    transition: 0.5s;
+  }
+
+.buttons form {
+    margin-left: 2.5%;
+}
+
+  #importProductBtn {
+    margin-left: 2.5%;
+  }
+
+  #category-filter {
+    margin-left: 0;
+  }
+
+  
+/*----------Produktliste------------ */
+
+.Produkt_liste {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2%;
+    /* align-items: center;
+    justify-content: center; */
+}
+
+.Produkt_liste form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+.product_card {
+    width: 80%;
+    height: 25vh;
+    background-color: white;
+    display: flex;
+    border-radius: 20px;
+    margin: 0 2% 2% 2%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    /* overflow: hidden; */
+}
+
+.picture {
+    width: 25%;
+    padding: 0.5em;
+}
+
+.picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 15px;
+}
+
+.description {
+    width: 75%;
+    padding: 0.5em;
+    position: relative;
+}
+
+.description button {
+    border-radius: 20px;
+    max-width: 400px; 
+    width: auto ;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    position: absolute;
+    bottom: 7%;
+    right: 2%;
+    font-size: 17px;
+}
+
+.description #edit {
+    position: absolute;
+    bottom: 27%;
+    right: 2%;
+}
+
+.description #edit:hover {
+    background-color: #d2d2d2;
+    transition: 0.5s;
+}
+
+.description button:hover {
+    background-color: #EB5757;
+    transition: 0.7s;
+}
+
+.description h4 {
+    padding: 0;
+}
+
+.description h4, h5, h6 {
+    margin: 0 0 0 1%;
+    font-size: 18px;
+}
+
+.description p {
+    margin: 0 0 0 1%;
+    font-size: 18px;
+    width: 55%;
+    height: 50%;
+    word-wrap: break-word;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+}
+
+.description p::-webkit-scrollbar { 
+    display: none;
+}
+
+.description h4, h6 {
+    font-weight: bold;
+}
+
+.description h5 {
+    font-weight: lighter;
+}
+
+.checkbox {
+    position: relative;
+    left: -7%;
+} 
+
+
+.price {
+    position: absolute;
+    top: 15%;
+    right: 13%;
+    font-weight: bold;
+}
+
+.popup-dialog {
+    padding: 2em;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    background-color: white;
+    border-radius: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.popup-dialog p {
+    font-size: 0.7em;
+    color: #161A30;
+    font-weight: bold;
+}
+
+.popup-dialog button {
+    margin: 0;
+    height: 2em;
+    background-color: #161A30;
+    color: white;
+    border-radius: 20px;
+    padding: 0 0.4em 0 0.4em;
+    text-align: right;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.popup-dialog button:hover {
+    background-color: #d2d2d2; 
+    transition: 0.5s;
+}
+
+.popup-dialog #sub-delShop:hover, .popup-dialog #sub-delAcc:hover {
+    background-color: #EB5757; 
+    transition: 0.5s;
+}
+
+.popup-dialog form {
+    display: flex;
+    justify-content: space-between;
+}

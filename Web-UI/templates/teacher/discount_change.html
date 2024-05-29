@@ -1,0 +1,59 @@
+{% extends 'teacher/base.html' %} {% block CDN %} <link rel="stylesheet"
+href=../../static/css/teacher/iban_change.css/> {% endblock %} {% block title
+%}IBAN change{% endblock %} {% block content %}
+<div class="main-content">
+  <div class="header">
+    <h2>Administration - Change Discount</h2>
+  </div>
+  <div class="vendor">
+    <p id="old_discount">
+      Your current Skonto: {{ "%.1f" % (discount["discount"]/ 10) }} %
+    </p>
+    <p id="old_period">
+      Your current Skonto period: {{ skonto_period["skonto_period"] }}
+    </p>
+  </div>
+
+  <form action="" method="post" id="vendor-iban-change">
+    <!-- Vendor IBAN -->
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="discount">Skonto</span>
+      <input
+        id="discount"
+        class="form-control"
+        placeholder="Your new Discount"
+        pattern="^\d+([.,]\d)?$"
+        title="A number with 1 decimal places"
+        required
+      />
+      <span class="input-group-text">%</span>
+    </div>
+
+    <!-- Skonto period -->
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="skonto-period">Skonto period</span>
+      <input
+        type="text"
+        class="form-control"
+        id="skonto_period"
+        placeholder="Skonto period in days"
+        pattern="[0-9]+"
+        title="Cannot start or end with a space, no consecutive spaces allowed"
+        required
+      />
+    </div>
+
+    <!-- Buttons -->
+    <div class="submit-cancel">
+      <span>
+        <button id="cancel-button">Cancel</button>
+      </span>
+      <span>
+        <button id="submit-button" type="submit">Submit</button>
+      </span>
+    </div>
+  </form>
+</div>
+
+<script src="../../static/javascript/teacher/discount_change.js"></script>
+{% endblock %}

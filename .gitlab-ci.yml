@@ -1,0 +1,76 @@
+# ausm latex-template von gitlab angepasst
+
+variables:
+  LATEX_IMAGE: listx/texlive:2020
+
+build-pflichtenheft-tex:
+  image: $LATEX_IMAGE
+  needs: []
+  rules:
+    - changes: [Pflichtenheft/**/*.tex, Pflichtenheft/**/*.bib, Pflichtenheft/img/**]
+      when: always
+  artifacts:
+    paths: [Pflichtenheft/pflichtenheft.pdf]
+    expire_in: 1 week
+  script:
+    - cd Pflichtenheft
+    - latexmk --pdf pflichtenheft.tex
+
+build-entwurfsdoku-tex:
+  image: $LATEX_IMAGE
+  needs: []
+  rules:
+    - changes: [Entwurfsdoku/**/*.tex, Entwurfsdoku/**/*.bib, Entwurfsdoku/img/**]
+      when: always
+  artifacts:
+    paths: [Entwurfsdoku/entwurfsdoku.pdf]
+    expire_in: 1 week
+  script:
+    - cd Entwurfsdoku
+    - latexmk --pdf entwurfsdoku.tex
+
+build-test-docker:
+  image: docker:24-dind
+  needs: []
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      when: always
+    - if: $CI_COMMIT_BRANCH != "master" && $CI_PIPELINE_SOURCE != "merge_request_event"
+      changes: [Web-UI/**]
+      when: manual
+    - if: $CI_COMMIT_BRANCH != "master" && $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: always
+  script: |
+    cd Web-UI
+    if [ "$CI_COMMIT_BRANCH" == "master" ]; then
+      docker build -t gogross/master .
+      docker run --rm gogross/master ./run.sh test
+    else
+      rand_id=$RANDOM
+      docker build -t gogross/test-$rand_id .
+      docker run --rm gogross/test-$rand_id ./run.sh test
+      ret_code=$?
+      docker rmi gogross/test-$rand_id
+      exit $ret_code
+    fi
+
+build-nginx-docker:
+  image: docker:24-dind
+  needs: []
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      when: always
+  script:
+    - cd gogross-nginx
+    - docker build -t gogross-nginx .
+
+deploy-docker:
+  image: docker:24-dind
+  needs: [build-test-docker, build-nginx-docker]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      when: on_success
+  script:
+    - cd Web-UI
+    - docker compose down || true
+    - docker compose up -d

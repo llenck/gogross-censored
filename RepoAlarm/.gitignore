@@ -1,0 +1,6 @@
+*-api-key
+.stack-work
+*.opus
+!pipeline-error.opus
+!pipeline-success.opus
+!deletion-warning.opus

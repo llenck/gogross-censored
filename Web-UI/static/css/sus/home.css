@@ -1,0 +1,103 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #B6BBC4;
+    font-size: 20px;
+    color: #161A30;
+}
+
+.container {
+    padding-left: 1rem;
+    width: 100%;
+}
+
+header {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 1rem;
+    font-size: larger;
+}
+
+header h2 {
+    color: #161A30;
+    margin: 0;
+    font-family: "DM Sans", sans-serif;
+    font-weight: bold;
+}
+
+.home-content {
+    flex: 1;
+    height: 100%;
+    padding: 1em;
+}
+
+.discounts {
+    padding: 1em;
+    margin-bottom: 1rem;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    font-family: "DM Sans", sans-serif;
+    font-weight: bold;
+}
+
+.discounts h4 {
+    font-family: "DM Sans", sans-serif;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.order-history {
+    background-color: white;
+    padding: 1em;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.order-history table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-history caption {
+    text-align: left;
+    font-family: "DM Sans", sans-serif;
+    font-weight: bold;
+    font-size: 1em;
+    margin-bottom: 0.5em;
+    caption-side: top;
+}
+
+.order-history th, .order-history td {
+    padding: 0.5em;
+    text-align: center;
+    border-bottom: 1px solid lightgray;
+    font-family: "DM Sans", sans-serif;
+}
+
+p, a {
+    font-family: "DM Sans", sans-serif;
+}
+
+@media only screen and (max-width: 1000px) {
+    .content {
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .res-hide-640 {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 460px) {
+    .res-hide-460 {
+        display: none;
+    }
+}

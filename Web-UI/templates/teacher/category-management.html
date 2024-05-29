@@ -1,0 +1,55 @@
+{% extends 'teacher/base.html' %} {% block CDN %}
+<link rel="stylesheet" href="/static/css/teacher/category-management.css" /> {%
+endblock %} {% block title %}Home{% endblock %}
+
+<!--html content-->
+{% block content %}
+
+<div class="header">
+  <h2>Products - Shop - Manage Category</h2>
+</div>
+
+<div class="add-category">
+  <h4>Category</h4>
+
+  <!-- Add Category -->
+  <div class="addCategory">
+    <button id="addCategoryBtn">Add Category</button>
+  </div>
+</div>
+
+<div class="categoryliste">
+  <ul id="categoryList">
+    {% for category in categories %}
+    <li id="{{ category }}">
+      {{ category }} <button onclick="deleteCategory('{{ category }}')">
+        <i class="fa-solid fa-trash-can" style="color: #161a30"></i>
+      </button>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<!-- Popup -->
+<div id="popup" style="display: none">
+  <input type="text" id="newCategoryName" placeholder="New Category Name" />
+  <button onclick="saveNewCategory()">Save</button>
+  <button onclick="cancelNewCategory()">Cancel</button>
+</div>
+
+<!-- Save and Cancel -->
+
+
+<div class="submit-cancel">
+  <span>
+    <button onclick="cancelChanges()">Cancel</button>
+  </span>
+  <span>
+    <button onclick="submitCategories()">Submit</button>
+  </span>
+</div>
+
+
+<!--javascript file-->
+<script src="/static/javascript/teacher/category-management.js"></script>
+{% endblock %}

@@ -1,0 +1,19 @@
+services:
+  gogross:
+    image: gogross/master
+    build: .
+    volumes:
+      - gogross-run-dir:/run/:rw
+      - gogross-persist:/usr/src/persist:rw
+  # NOTE: the name "gogross-rev-proxy" must match the name in
+  # admin-cli/admin-cli.sh's GOGROSS_BASE autodetection
+  gogross-rev-proxy:
+    image: gogross-nginx
+    build: ../gogross-nginx/
+    volumes:
+      - gogross-run-dir:/gogross-run/:rw
+    ports:
+      - 8080:80
+volumes:
+  gogross-run-dir:
+  gogross-persist:

@@ -1,0 +1,5 @@
+flask
+sqlalchemy
+bcrypt
+python-magic
+reportlab

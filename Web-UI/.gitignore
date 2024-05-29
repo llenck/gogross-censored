@@ -1,0 +1,10 @@
+__pycache__
+venv
+*.db
+session_key
+admin_key
+.vscode
+*.cookie-jar
+*.pdf
+*.json
+last-output

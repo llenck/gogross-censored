@@ -1,0 +1,55 @@
+{% extends 'sus/base.html' %}
+{% block title %}Shopping cart{% endblock %}
+{% block content %}
+
+<link rel="stylesheet" href="/static/css/sus/cart.css" />
+
+<div class="header">
+    <h1>Shopping cart</h1>
+</div>
+
+<div class="cart-content">
+    {% for invoice_line in invoice_lines %}
+    <div class="products">
+        <div class="product">
+            <div class="product_picture">
+                <img src="img?product={{ invoice_line["item_id"] }}">
+            </div>
+            <div class="product_information">
+                <h3>{{ invoice_line["name"] }}</h3>
+                <h4>{{ invoice_line["manufacturer"] }}</h4>
+                <h3>Item No.: {{ invoice_line["item_canon_id"] }}</h3>
+                <p>Description: {{ invoice_line["description"] }}</p>
+            </div>
+            <div class="remove_product">
+                <div class="remove_info">
+                    <h2>{{ "%.2f" % (invoice_line["total"] / 100) }}€</h2>
+                    <h4>Quantity: {{ invoice_line["quantity"]}}</h4>
+                    <h4>Price per Unit: {{ "%.2f" % (invoice_line["price_per_unit"] / 100) }}€</h4>
+                </div>
+                <div class="remove_action">
+                    <form action="del-from-cart" method="POST">
+                        <input type="hidden" name="invoice_line_id" value="{{ invoice_line["canon_id"]}}" />
+                        <input class ="btn_remove" type="submit" value="Remove from shopping cart">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% if invoice_lines | sum(attribute='total') > 0 %}
+<div class="checkout">
+    <h2 class="total">Total: {{ "%.2f" % (invoice_lines | sum(attribute='total') / 100) }}€</h2>
+    <form action="checkout" method="POST" id="checkout">
+    </form>
+    <button class ="btn_checkout" type="submit" form ="checkout">Checkout</button>
+</div>
+{% endif %}
+<form action="catalog">
+    <input class="more_products" type="submit" value="Look for more products"/>
+</form>
+
+<script src="/static/javascript/sus/cart.js"></script>
+
+{% endblock %}

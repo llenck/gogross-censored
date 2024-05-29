@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+d=$(dirname $0)
+
+while inotifywait -e modify,create $d $d/kapitel; do
+	latexmk --pdf $d/pflichtenheft.tex || exit 1
+done

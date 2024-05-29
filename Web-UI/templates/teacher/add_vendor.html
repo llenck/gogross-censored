@@ -1,0 +1,108 @@
+{% extends 'teacher/base.html' %} {% block CDN %} <link rel="stylesheet"
+href=/static/css/teacher/add_vendor.css /> {% endblock %} {% block title %}Add
+Shop{% endblock %} {% block content %}
+
+<div class="main-content">
+  <div class="header">
+    <h2>Administration - Add Vendor</h2>
+  </div>
+
+  <form action="" id="vendor-info-form">
+    <div class="vendor-info">
+      <!-- Drag and drop -->
+      <div class="drag-area mb-3">
+        <div class="icon">
+          <i class="fa-solid fa-cloud-arrow-up" style="color: #161a30"></i>
+        </div>
+        <header>Drag and Drop to upload logo</header>
+        <span>OR</span>
+        <button type="button">Browse Files</button>
+        <input type="file" id="image" accept="image/*" hidden />
+      </div>
+
+      <!-- Vendor Name -->
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="name">Name</span>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Shop Name"
+          pattern="[^ ](.*[^ ])?"
+          title="Cannot start or end with a space, no consecutive spaces allowed"
+          required
+        />
+      </div>
+
+      <!-- Vendor IBAN -->
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="iban">IBAN</span>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="IBAN"
+          pattern="[a-zA-Z0-9]+"
+          title="No special characters allowed"
+          required
+        />
+      </div>
+
+      <!-- Skonto Discount -->
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="invoice_notes">Invoice Notes</span>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Invoice Notes"
+          pattern="[^ ](.*[^ ])?"
+          title="Cannot start or end with a space, no consecutive spaces allowed"
+          value="Thank you for your purchase :)"
+          required
+        />
+      </div>
+
+      <!-- Skonto Discount -->
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="skonto">Skonto discount</span>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Skonto Discount in %"
+          pattern="^\d+([.,]\d)?%?$"
+          title="A number with 1 decimal places"
+          value="2"
+          required
+        />
+        <span class="input-group-text">%</span>
+      </div>
+
+      <!-- Skonto period -->
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="skonto-period"
+          >Skonto period, in days</span
+        >
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Skonto period in days"
+          pattern="[0-9]+"
+          title="Cannot start or end with a space, no consecutive spaces allowed"
+          value="2"
+          required
+        />
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="submit-cancel">
+      <span>
+        <button id="cancel-button">Cancel</button>
+      </span>
+      <span>
+        <button id="submit-button" type="submit">Submit</button>
+      </span>
+    </div>
+  </form>
+
+  <script src="/static/javascript/teacher/add_vendor.js"></script>
+</div>
+{% endblock %}

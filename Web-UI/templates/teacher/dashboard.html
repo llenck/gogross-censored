@@ -1,0 +1,144 @@
+{% extends 'teacher/base.html' %} 
+{% block title %}Dashboard{% endblock %}
+{% block CDN %}<link rel="stylesheet" href="/static/css/teacher/dashboard.css" />{% endblock %}
+
+{% block content %}
+
+<header>
+  <h2>
+    Dashboard
+  </h2>
+  <select name="shops", id="shop", onchange="window.location.href=this.value;">
+      <option value="dashboard">all shops</option>
+    {% for shop in shops %}  <!--Benötigt Liste der Großhändler-->
+      <option value="dashboard?shop={{ shop["id"] }}" {% if shop["id"] | string() == request.args.get('shop') %} selected="selected"{% endif %} >{{ shop["name"] }}</option>
+    {% endfor %}
+  </select>
+</header>
+<div class="dash-content">
+  <div class = "total-orders">
+    <h4>Total orders: {{ invoices | length }}</h4>
+  </div>
+
+  <div class="total-customer">
+    <h4>Total customers: {{ cust_count }}</h4>
+  </div>
+
+  <div class = "unpaid-orders">
+    <h4>Unpaid orders: {{ unpaid_count }}</h4>
+  </div>
+
+  <div class="graph">
+<!-- canvas Element von Chart.js (anzeigen des Diagramms) -->
+    <canvas id="revenue"></canvas>
+  </div>
+
+  <div class="invoices">
+    <table id="invoiceTable">
+      <!-- <caption>Invoices</caption> -->
+      <tr>
+        <th>InvoiceID</th>
+        <th>Date</th>
+        <th>Customer name</th>
+        <th>E-Mail</th>
+        <th>Total price</th>
+        <th>Total Skonto</th>
+        <th>Skonto period</th>
+        <th>Paid</th>
+      </tr>
+      {% for invoice in invoices %}
+      <tr>
+        <td>{{ invoice["id"] }}</td>
+        <td>{{ invoice["date"].strftime('%Y-%m-%d, %H:%M') }}</td>
+        <td>{{ invoice["customer_name"] }}</td>
+        <td>{{ invoice["email"] }}</td>
+        <td>{{ "%.2f" % (invoice["total"] / 100) }} €</td>
+        <td>{{ "%.2f" % (invoice["total_discounted"] /100 ) }} €</td>
+        <td>{{ invoice["discount_period"] }} days</td>
+        <td>
+          <form action="" method="POST">
+            <input type="hidden" name="id" value="{{ invoice["id"] }}">
+            <input type="checkbox" name="paid" {% if invoice["paid"] == True %}checked{% endif %} onChange="this.form.submit()"/>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+<!--Graph Customer revenue mittels Chart.js-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+
+  if ( "{{ unpaid_count }}" == "0") {
+    document.querySelector("div.unpaid-orders > h4").style.color = "#6fc276";
+  }
+
+  /*Funktion Gesamteinnahmen pro Händler*/
+  var customerRevenue = {};
+
+  document.querySelectorAll("#invoiceTable tr:not(:first-child)").forEach(function(row) {
+    var customerName = row.cells[2].textContent;
+    var totalRevenue = parseFloat(row.cells[4].textContent);
+
+    if (customerRevenue[customerName]) {
+      customerRevenue[customerName] += totalRevenue;
+    } else {
+      customerRevenue[customerName] = totalRevenue;
+    }
+  });
+
+
+  /*Random Colorgenerator nach Anzahl der Customer (dynmasche Größe)*/
+  var chartColors = []
+  for (i = 0; i < Object.keys(customerRevenue).length; i++) {
+    const r = Math.floor(Math.random() * 255);
+    const g = Math.floor(Math.random() * 255);
+    const b = Math.floor(Math.random() * 255);
+    chartColors.push("rgb("+r+", "+g+", "+b+")");
+  }
+
+
+  /*Erstellung des Diagramms (Chart.js)*/
+  new Chart(document.getElementById("revenue"), {
+    type: "doughnut",
+    data: {
+      labels: Object.keys(customerRevenue).slice(0, 8),
+      datasets: [{
+      label: "Revenue per Customer",
+      data: Object.values(customerRevenue).slice(0, 8),
+      backgroundColor: [
+        "#0d47a1",
+        "#1565c0",
+        "#1976d2",
+        "#1e88e5",
+        "#2196f3",
+        "#42a5f5",
+        "#64b5f6",
+        "#90caf9"
+      ],
+      hoverOffset: 4
+    }]
+    },
+    options: {
+      animation: false,
+      responsive: true,
+      plugins:{
+        legend: {
+            display: false
+        },
+        title: {
+          display: true,
+          text: "Revenue per Customer Chart",
+          color: "rgb(22, 26, 48)",
+          font: {
+            size: 14
+          }
+        }
+      }
+    }
+  });
+
+</script>
+{% endblock %}

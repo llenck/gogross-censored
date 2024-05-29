@@ -1,0 +1,31 @@
+Muss-Kriterien:
+    - Pro Planspiel können mehrer Großhändler angelegt werden, diese sind nach Ländern kategorisiert
+    - Spielleiter:innen können alle Planspiele verwalten und haben Zugriff auf alle Daten, inklusive der Transaktionen
+    - Lehrkräfte haben Zugriff auf alle Großhändler des eigenen Landes, und können Produkte, Kategorien sowie Verkäufe verwalten
+    - Jedes SuS-Unternehmen kann sich einen Account pro Großhändler des eigenen Landes erstellen. (In Soll?)
+    - Die Webshops der Großhändler haben eine Bestellfunktion (kompletter Checkout). Die einzige Bezahl-Methode ist „Rechnungsstellung mit Überweisung“
+    - Der Zugriff auf den Webshop für die Kunden (SuS-Unternehmen) soll nur nach einer Anmeldung mit Benutzername und Kennwort möglich sein
+    - Die Benutzermasken der Software sind englischsprachig
+    - Zusätzlich zur Webseite ist eine Android-App gefordert, mit der SuS die gleichen Funktionen wie auf der Webseite nutzen können.
+    - Admin kann Passwörter zurücksetzen
+    - 
+Soll-Kriterien:
+    - Wenn sich ein SuS-Unternehmen registriert, bekommt es abhängig von dem Land nur die landinternen Großhändler angezeigt
+    - Rechnungen sollen nach einem Kauf automatisiert an die E-MailAdresse des SuS-Unternehmens geschickt werden
+    - Der Import / Export ganzer Großhändler sowie einzelner Produkte ist möglich
+    - Die Software soll modular aufgebaut sein, sodass spätere Erweiterungen möglich sind.
+    - Preisnachlässe (Sconto, Rabatte) werden automatisch in den Endpreis miteinberechnet
+    - Für die Account-Erstellung soll es einen Deeplink für Lehrer und einen Deeplink für Schüler geben
+    - Die Software muss über eine intuitive Weboberfläche anwenderfreundlich bedienbar sein und schnell erlernbar sein.
+    - Helpfunktion die alle sichtbaren Möglichkeiten erklärt
+
+Kann-Kriterien:
+    - Gesamte Planspiele können importiert / exportiert werden.
+    - Die Benutzermasken der Software sind mulitlingual (Deutsch, Dänsich, Niederländisch, Norwegisch)
+    - Es können mehrer Planspiele parallel verlaufen
+    - Chatfunktion
+    - API verbindung zur Bank 
+Abgrenzungskriterien
+    - Es gibt keine Mehrwertsteuer oder Umsatzsteuer.
+    - Es wird nur in Euro gehandelt
+    - Ein Account kann nur mittels Deeplink erstell werden

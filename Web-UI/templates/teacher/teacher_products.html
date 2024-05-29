@@ -1,0 +1,117 @@
+{% extends 'teacher/base.html' %}
+
+{% block title %} Products {% endblock %}
+
+{% block CDN %} <link rel="stylesheet" href="/static/css/teacher/teacher_products.css" /> {% endblock %}
+
+{% block content %}
+
+<!--Shopauswahl für die jeweilgen Shops des Landes , um entsprechende Produktseite aufzurufen-->
+    <div class="header">
+
+        <h2 id="headline">Products</h2>
+
+            <!--Shopauswahl, navigiert bei Auswahl zu /products?shop=[shopID] Parameter ShopID-->
+            <select id="shops" onchange="window.location.href = this.value;">
+                <option value="/products">Select shop...</option>
+                {% for shop in all_vendors_infos %} <!--Iteration über verfügbare Shops im Land, ShopID und Shopname wird benötigt-->
+                    <option id='{{ shop["id"] }}' value='/products?shop={{ shop["id"] }}'>{{ shop["name"] }}</option>
+                {% endfor %}
+            </select>
+    </div>
+
+    <!--Folgende Elemente sind erst sichtbar nach Shopauswahl (JS code)-->
+    <div id="hide" style="display: none"> 
+
+        <!--Buttons für die verschiednen Optionen (Filtern nach Kategorie, Kategoriemanagement, Add Products, Import Products, Export selected Products)-->
+        <div class="buttons"> 
+
+            <!--Kategoriefilter, onchange JS Funktion Weiterleitung zu entsprechender API (Parameter Shopabhängig und Kategorieabhängig)-->
+            <select id="category-filter" onchange="filterCategory(this.value)"> 
+                <option id="all-category" value="all-category">All Categories</option> <!--Produkte aller Kategorien sollen angezeitgt werden-->
+            {% for category in kategory_list %} <!--Iteration über verfügbare Kategorien eines Shops, KategoerieID und Name wird benötigt-->
+                <option id='cat{{ category["id"] }}' value='{{ category["id"] }}'>{{ category["name"] }}</option> <!--Produkte, ausgewählter Kategorien sollen angezeigt werden (KategorieID benötigt)-->
+            {% endfor %}
+            </select>
+
+            <!--Category Management, onclick JS Funktion Weiterleitung zu entsprechender API (Parameter Shopabhängig)-->
+            <button type="button" onclick="navigateToCM()">Manage Categories</button>
+
+            <!--Add Product, onclick JS Funktion Weiterleitung zu entsprechender API (Parameter Shopabhängig)-->
+            <button type="button" onclick="navigateToAddP()">Add Product</button>
+
+            <!--Import Products, JS Funktion: importProducts() POST request JSON-File mit Produktdaten-->
+            <div id="importProductBtn">
+                <form>
+                    <input type="file" id="importProduct" name="importProduct" accept=".json" style="display: none;" onchange="importProducts(event);" required>
+                    <button type="submit" onclick="checkCat()">Import Products</button>
+                </form>
+            </div>
+
+            <!--Export von ausgewählten Produkten via selected Checkbox-->
+            <form>
+                <button class="exportBtn" type="button" onclick="exportSelectedProducts()">Export selected Products</button>
+        </div>
+
+        <!--Liste der Produkte-->
+        <div class="Produkt_liste">
+
+                <!--einzelnes Produkt (Produktkarte) + Checkbox für Export mit allen Produktattributen + Produkt aus Shop löschen Button-->
+                {% for produkt in product_liste %}
+                    <div class="product_card" id='{{ produkt["canon_id"] }}'>
+
+                        <!--Checkbox für Export-->
+                        <input class="checkbox" type="checkbox" canon_id='{{ produkt["canon_id"] }}' category='{{ produkt["category"] }}' name='{{ produkt["name"] }}' manufacturer='{{ produkt["manufacturer"] }}' description='{{ produkt["description"] }}' price='{{ produkt["price"] }}' picture='{{ produkt["pic_b64"] }}'>
+                        
+                        <!--Bild Section-->
+                        <div class="picture">
+                            <img src='/products/img?product={{ produkt["id"] }}', alt="Product Image">
+                        </div>
+
+                        <!--Beschreibung/Informations Section-->
+                        <div class="description">
+                            <h4>{{produkt["name"]}}</h4>
+                            <h5>{{produkt["manufacturer"]}}</h5>
+                            <h6>Art-Nr: {{produkt["canon_id"]}}</h6>
+                            <p>Description: {{produkt["description"]}}</p>
+                            <h4 class="price">{{ "%.2f" % (produkt["price"] / 100) }} &#8364;</h4>
+
+                            <!--Produkt editieren, JS Funktion nav To Edit Seite-->
+                            <button id="edit" type="button" value='{{ produkt["id"] }}' onclick='navToEdit(this.value)'>Edit Product</button>
+
+                            <!--Produkt aus Shop löschen, JS Funktion deleteProdukt(Parameter: Artikelnummer, Produktkategorie)-->
+                            <button type="button" value='{{ produkt["canon_id"] }}' name='{{ produkt["category"] }}' onclick='deleteProduct(this.value, this.name)'>Remove Product from catalog</button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </form>
+        </div>
+    </div> <!--Ende hide div-->
+
+    <dialog>
+        <select id="category-import" onchange="filterCategory(this.value)"> 
+            <option id="import-all-category" value="all-category">All Categories</option> <!--Produkte aller Kategorien sollen angezeitgt werden-->
+        {% for category in kategory_list %} <!--Iteration über verfügbare Kategorien eines Shops, KategoerieID und Name wird benötigt-->
+            <option id='importcat{{ category["id"] }}' value='{{ category["id"] }}'>{{ category["name"] }}</option> <!--Produkte, ausgewählter Kategorien sollen angezeigt werden (KategorieID benötigt)-->
+        {% endfor %}
+        </select>
+    </dialog>
+
+    <!--Javascript File für benutzte Funktionen-->
+    <script src="/static/javascript/teacher/teacher_products.js"></script>
+    <script>
+    /*Überprüft ob Kategorien existieren, bevor man Produkte hinzufügen kann (Syntax error wegen Jinja)*/
+        function navigateToAddP() {
+            var categoryListLength = {{ kategory_list|length }};
+            console.log(categoryListLength)
+
+            if (categoryListLength == 0) {
+                alert("Please add categories before add Products")
+                return;
+            } else {
+                window.location.href="/products/add?shop=" + saveShopID()
+            }
+        }
+    </script>
+
+{% endblock %}

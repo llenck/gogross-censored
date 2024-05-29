@@ -1,0 +1,120 @@
+\documentclass{report}
+
+\usepackage[utf8]{inputenc} % Charakter-Kodierung
+\usepackage[german]{babel} % Sprache
+
+\usepackage[table,xcdraw]{xcolor} % Tabellen Farben
+\usepackage{tabularx} % Dynamische Tabellenbreite
+\usepackage{hyperref} % url Umgebung
+\usepackage{todonotes} % Notizen
+\usepackage{natbib} % Bibliographie
+\usepackage{fancyhdr} % Header und Footer
+\usepackage{multirow} % Multizeile
+\usepackage{geometry} % Page layout
+\usepackage{color} % Text Farben
+\usepackage{hyperref}
+
+% Page layout
+\geometry{
+	bottom=3.5cm,
+	headheight=180pt
+}
+
+% Nummerierung der ersten Seiten verhindern
+\pagenumbering{gobble}
+
+% Bibstyle
+\bibliographystyle{plain}
+
+% Header / Footer
+\fancypagestyle{plain}{
+	\fancyhf{}% Clear header/footer
+	\fancyhead[R]{\includegraphics[width=4cm]{img/cau-logo-2017}} % Rechter header
+	\fancyhead[L]{\leftmark} % Linker header
+	\fancyfoot[R]{\thepage} % Rechter footer
+	\fancyfoot[L]{\includegraphics[width=1cm]{img/se-logo}} % Linker footer	
+}
+\pagestyle{plain}
+
+\renewcommand{\headrulewidth}{0.5pt} % Unnötige Informationen der Kapitelangabe
+\renewcommand{\footrulewidth}{0.2pt} % entfernen
+\renewcommand{\chaptermark}[1]{\markboth{{#1}}{}}
+
+
+
+
+% Zahlen für Fußnoten
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\renewcommand{\thempfootnote}{\arabic{mpfootnote}}
+
+%%%%% Ausfüllen %%%%%
+
+\newcommand{\gruppenname}{Gruppe WSP3 1}
+\newcommand{\projektname}{Projekt GoGross}
+\newcommand{\semester}{Wintersemester 2023/24}
+
+
+% Titelseite
+\AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}}
+
+\title{
+	\vspace*{-3cm}
+	Pflichtenheft\\
+	\projektname\\
+	GoGross\\
+	\color{gray}
+	Softwareprojekt \semester\\
+	\gruppenname\\
+	\vspace*{5mm}
+	\includegraphics[width=\textwidth]{img/logo}
+}
+
+\author{
+	\begin{tabular}{r l@{\hspace{8\tabcolsep}} r} 
+		Lia & Lenckowski & \multirow{8}{*}{ \includegraphics{img/se-logo} } \\
+		Leon & Klausing \\
+		Matheus & Kolzarek \\
+		Noe & Baumann \\
+		Shutong & Sun \\
+		Til & Schmidt \\
+		Tjark-Morten & Thies \\
+		Yuri & Hassink \\
+	\end{tabular}
+}
+
+\date{\today}
+
+
+% Dokument
+
+\begin{document}
+	\maketitle
+
+	\tableofcontents
+	
+	\chapter{Lizenz}\label{chp:lizenz}
+	\pagenumbering{arabic} % Nummerierung starten
+	\input{kapitel/lizenz}
+	
+	\chapter{Produkteinsatz}\label{chp:produkteinsatz}
+	\input{kapitel/produkteinsatz}
+	
+	\chapter{Zielbestimmungen}\label{chp:zielbestimmungen}
+	\input{kapitel/zielbestimmungen}
+	
+	\chapter{Produktfunktionen}\label{chp:produktfunktionen}
+	\input{kapitel/produktfunktionen}
+	
+	\chapter{Testfälle}\label{chp:testfaelle}
+	\input{kapitel/testfaelle}
+
+	\chapter{Produktdaten}\label{chp:produktdaten}
+	\input{kapitel/produktdaten}
+	
+	\chapter{Glossar}\label{chp:glossar}
+	\input{kapitel/glossar}
+	
+	
+	
+\end{document}
+\pagenumbering{gobble} % Nummerierung deaktivieren

@@ -1,0 +1,154 @@
+{% extends 'teacher/base.html' %}
+
+{% block title %}Edit Product{% endblock %} 
+
+{% block CDN %}
+<link rel="stylesheet" href="/static/css/teacher/products_edit.css" /> 
+{% endblock %}
+
+<!--html content-->
+{% block content %}
+
+<div class="main-content">
+  <div class="header">
+    <h2>Products - Shop - Edit Product</h2>
+  </div>
+
+  <form action="" id="product-info-form">
+    <div class="product-info">
+      <!-- Drag and Drop -->
+      <div class="drag-area mb-3">
+        <div class="icon">
+          <i class="fa-solid fa-cloud-arrow-up" style="color: #161a30"></i>
+        </div>
+        <header>Drag and Drop to upload file</header>
+        <span>OR</span>
+        <button type="button">Browse File</button>
+        <input 
+        type="file" 
+        id="image" 
+        accept="image/*" 
+        hidden />
+      </div>
+
+      <!-- Product name -->
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="name">Name: </span>
+        <input
+          value = "{{  product_info['name']  }}"
+          type="text"
+          class="form-control"
+          placeholder="Product Name"
+          pattern="[^ ](.*[^ ])?"
+          title="Cannot start or end with a space, no consecutive spaces allowed"
+          maxlength="50"
+          required
+        />
+      </div>
+
+      <!-- Category -->
+      <div class="input-group mb-3" hidden>
+        <span class="input-group-text" id="category"> Category: </span>
+        <input
+          value = "{{  product_info['category']  }}"
+          type="text"
+          class="form-control"
+          placeholder="Category"
+        />
+      </div>
+
+      <!-- Item number -->
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="item-number">Item No.:</span>
+        <input
+          type="text"
+          class="form-control"
+          value = "{{  product_info['canon_id']  }}"
+          placeholder="Item number"
+          pattern="[0-9]+"
+          title="A Number"
+          required
+        />
+      </div>
+
+      <!-- Description -->
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="decription">Description: </span>
+        <input
+          type="text"
+          class="form-control"
+          value = "{{  product_info['description']  }}"
+          placeholder="Description"
+          maxlength="120"
+          required
+        />
+      </div>
+
+      <!-- Price -->
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="price">Price: </span>
+        <input
+          type="text"
+          class="form-control"
+          value = "{{ "%.2f" % (product_info["price"] / 100) }}"
+          placeholder="Price"
+          pattern="^\d+([.,]\d\d)?$"
+          title="A number with 2 decimal places"
+          required
+        />
+      </div>
+
+      <!-- Manufacturer -->
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="manufacturer">Manufacturer: </span>
+        <input
+          type="text"
+          class="form-control"
+          value = "{{  product_info['manufacturer']  }}"
+          placeholder="Manufacturer"
+          pattern="[^ ](.*[^ ])?"
+          title="Cannot start or end with a space, no special characters, no consecutive spaces allowed"
+          maxlength="50"
+          required
+        />
+      </div>
+    </div>
+    <!-- Save and Cancel -->
+    <div class="submit-cancel">
+      <span>
+        <button id="cancel-button">Cancel</button>
+      </span>
+      <span>
+        <button id="submit-button" type="submit">Submit</button>
+      </span>
+    </div>
+  </form>
+
+  
+  <script> 
+
+    const dragArea = document.querySelector(".drag-area");
+    const previewImage = document.getElementById('previewImage');
+    const img = new Image();
+    img.src = '/products/img?product={{ product_info["id"] }}'
+    img.onload = () => {
+      dragArea.innerHTML = "";
+      dragArea.appendChild(img);
+      dragArea.classList.add("uploaded");
+      uploadedImageBase64 = '/products/img?product={{ product_info["id"] }}'
+    }
+
+  </script>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+
+
+  <script src="/static/javascript/teacher/products_edit.js"></script>
+
+    
+</div>
+{% endblock %}

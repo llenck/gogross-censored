@@ -1,0 +1,143 @@
+{% extends 'teacher/base.html' %} 
+
+{% block title %}Administration{% endblock %} 
+
+{% block CDN %}<link rel="stylesheet" href="/static/css/teacher/administration.css" />{% endblock %} 
+
+{% block content %}
+
+    <!--Header mit Überschrift + aktuelles Land der eingeloggten Lehrkraft-->
+    <header>
+        <h2>Administration - {{ teacher["country_code"] }}</h2>
+    </header>
+
+    <!--Generelle Elemente die unabhängig von einem ausgewählten Shop funktionieren--> 
+    <!--Generate Deeplink für SuS, Add Shop zum Land und Import Shop zum Land--> 
+    <div class="general">
+        <h4>General: </h4>
+
+        <!--Popup Feld mit dem Deeplink, falls Clipboard copy nicht funktioniert--> 
+        <dialog id="sus_dialog">
+            <!--Deeplink wird via js eingefügt--> 
+            <p id="sus_dl_copied"></p>
+            <code id="sus_deeplink_display"></code>
+            <!--Close Popup Btn--> 
+            <form id="close-dialog" method="dialog">
+                <button id="close-btn">Close</button>
+            </form>
+        </dialog>
+
+        <!--Generate Deeplink Btn, JS Funmtion: Link wird kopiert und angezeigt--> 
+        <button type="button" id="invite-link" onclick="copy_show_sus_dl()">Generate SuS registration link</button>
+
+        <!--Shop hinzufügen Btn, Weiterleitung auf entsprechende API--> 
+        <button type="button" id="add-vendor" onclick="window.location.href = 'administration/add-vendor'">Add Shop</button>
+
+        <!--Import Shop Btn + File Upload, JS Funktion POST request JSON File--> 
+        <!-- idk ob man die form vllt sogar komplet weglassen könnte -->
+		<form id="import-form" onsubmit="event.preventDefault()">
+            <input type="file" id="vendor-jsonFile" accept=".json" style="display: none;" onchange="importShop()" required> 
+            <button type="submit" onclick='document.getElementById("vendor-jsonFile").click()'>Import Shop</button>
+        </form>
+    </div>
+
+    <!--Shopabhängige Elemente/Sekeltions--> 
+    <!--Export Shop, Delete Shop und I-BAN ändern--> 
+    <div class="shop-specific">
+        <h4>Shop-Specific: </h4>
+
+        <!---Export Shop Btn, JS Funktion: Get File from Server--->
+        <select name="export-vendor" id="export-vendor" onchange="exportVendor(this.value)">
+            <option value="" selected>Export Shop</option>
+            {% for shop in all_vendors_infos %}
+            <option value='administration/export-vendor?shop={{ shop["id"] }}'>{{ shop["name"] }}</option>
+            {% endfor %}
+        </select>
+
+        <!---Shop löschen Btn, JS Funktion POST request mit ShopID Paramter--->
+        <select name="delete-vendor" id="delete-vendor" onchange="show_del_shop(this.value)">
+            <option value="" selected>Delete Shop</option>
+            {% for shop in all_vendors_infos %}
+            <option value='{{ shop["id"] }}'>{{ shop["name"] }}</option>
+            {% endfor %}
+        </select>
+
+        <!---I-BAN ändern Btn, Weiterleitung auf entsprechende Seite mit ShopID Parameter--->
+        <select name="iban-change" id="iban-change" onchange="window.location.href = this.value;">
+            <option value="" selected>I-BAN change</option>
+            {% for shop in all_vendors_infos %}
+            <option value='administration/change_iban?shop={{ shop["id"] }}'>{{ shop["name"] }}</option>
+            {% endfor %}
+        </select>
+
+        <!--- Rabatt hinzufügen-->
+        <select name="discount-change" id="discount-change" onchange="window.location.href = this.value;">
+            <option value="" selected>change Shop-Skonto</option>
+            {% for shop in all_vendors_infos %}
+            <option value='administration/change_discount?shop={{ shop["id"] }}'>{{ shop["name"] }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+<!--Personal Elemente/Settings, Account löschen--> 
+    <div class="personal">
+        <h4>Personal:</h4>
+
+        <!--Account löschen Btn, Popup wird geöffnet--> 
+        <button type="button" id="delete-acc" onclick='document.getElementById("delAcc_dialog").showModal();'>Delete Account</button>
+    </div>
+
+    <!--Popup für Account löschen--> 
+    <dialog class="popup-dialog" id="delAcc_dialog">
+        <p>This Account will be deleted. After submission you can't undo this action.</p>
+        <!--Popup Btn--> 
+        <form id="form-delAcc" method="dialog">
+            <button id="close-delAccc">Close</button>
+            <button id="sub-delAcc" onclick="submitDeleteAcc();">Submit</button>
+        </form>
+    </dialog>
+
+
+    <!--Popup für Shop löschen--> 
+    <dialog class="popup-dialog" id="delShop_dialog">
+        <p>This shop and all its products will be deleted. After submission you can't undo this action.</p>
+        <!--Popup Btn--> 
+        <form id="form-delShop" method="dialog">
+            <button id="close-delShop">Close</button>
+            <button id="sub-delShop">Submit</button>
+        </form>
+    </dialog>
+
+
+
+    <script>
+        /*----Deeplink URL, Clipboard copy und Popup----*/
+        let sus_dl = window.location.origin + "/{{ sus_deeplink }}/list"
+
+        let sus_dl_disp = document.getElementById("sus_deeplink_display");
+        sus_dl_disp.textContent = sus_dl;
+        
+        function copy_show_sus_dl() {
+            document.getElementById("sus_dialog").showModal();
+            if (navigator.clipboard !== undefined) {
+                navigator.clipboard.writeText(sus_dl);
+                console.log('Yesss');
+                document.getElementById('sus_dl_copied').textContent = 'Copied!';
+            } else {
+                console.log('Nooo');
+                document.getElementById('sus_dl_copied').textContent = '';
+            }
+        }
+
+        function show_del_shop(shopID) {
+            document.getElementById("delShop_dialog").showModal();
+            submit = document.getElementById("sub-delShop");
+            submit.addEventListener("click", function() {
+                deleteVendor(shopID);
+            });
+        }
+
+
+    </script>
+    <script src="/static/javascript/teacher/teacher_administration.js"></script>
+{% endblock %}

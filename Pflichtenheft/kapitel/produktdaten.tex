@@ -1,0 +1,70 @@
+\noindent \textbf{Game}
+\begin{itemize}
+    \item Name (PK) - Jedes Planspiel hat einen eindeutigen Namen.
+    \item Running - Gibt an, ob das Spiel läuft.
+\end{itemize}
+
+\noindent \textbf{Vendor}
+\begin{itemize}
+    \item Name (PK) - Jeder Großhändler hat einen eindeutigen Namen.
+    \item Country - Gibt das Land eines Großhändlers an.
+    \item IBAN - Gibt die IBAN eines Großhändlers an.
+    \item Discount - Gibt das Skonto an, das der Großhändler bei fristgerechter Zahlung gewährt.
+    \item Game Name (FK: Game.Name) - Jeder Großhändler gehört zu einem Planspiel.
+\end{itemize}
+
+\noindent \textbf{Vendor Accounts}
+\begin{itemize}
+    \item Vendor Name (PK) (FK: Vendor.Name) - Jeder Großhändleraccount ist einem Großhändler zugeordnet.
+    \item E-Mail (PK) - Gibt die E-Mail für den Großhändleraccount an.
+    \item Customer Name - Gibt den Namen des SuS-Unternehmen zum Großhändleraccount an.
+    \item Password - Gibt die Passwort für den Großhändleraccount an.
+\end{itemize}
+
+\noindent \textbf{Manager (Lehrkraft)}
+\begin{itemize}
+    \item E-Mail (PK) - Gibt die E-Mail-Adresse der Lehrkraft an.
+    \item Name - Jede Lehrkraft hat einen Namen.
+    \item Password - Gibt das Passwort der Lehrkraft an.
+    \item Country - Gibt das Land der Lehrkraft an.
+    \item Game ID (FK Game.Name) - Jede Lehrkraft gehört zu einem Planspiel.
+\end{itemize}
+
+\noindent \textbf{Category}
+\begin{itemize}
+    \item Vendor Name (PK) (FK: Vendor.Name) - Jede Kategorie ist einem Großhändler zugeordnet.
+    \item Name (PK) - Jede Kategorie hat einen Namen.
+\end{itemize}
+
+\noindent \textbf{Item}
+\begin{itemize}
+    \item Vendor Name (PK) (FK: Vendor.Name) - Jeder Artikel ist einem Großhändler zugeordnet.
+    \item Category Name (PK) (FK: Category.Name) - Jeder Artikel ist einer Kategorie zugeordnet.
+    \item No. (PK) - Jeder Artikel hat eine eindeutige Nummer.
+    \item Name - Jeder Artikel hat einen Namen.
+    \item Manufacturer - Jeder Artikel hat einen Hersteller.
+    \item Description - Jeder Artikel hat eine Beschreibung.
+    \item Price - Gibt den Preis des Artikels an.
+    \item Picture - Ein Artikel kann ein Bild haben.
+\end{itemize}
+
+\noindent \textbf{Invoice Header}
+\begin{itemize}
+    \item No. (PK) - Jede Rechnung hat eine eindeutige Nummer.
+    \item Vendor Name (FK: Vendor.Name) - Jede Rechnung hat einen Rechnungssteller.
+    \item Customer Name (FK: Customer.Name) - Jede Rechnung hat einen Rechnungsempfänger.
+    \item Date - Gibt das Datum der Rechnung an.
+    \item Amount - Gibt die Rechnungssumme an.
+    \item Amount incl. Discount - Gibt die Rechnungssumme inklusive Skonto an.
+    \item Payed - Gibt an, ob eine Rechnung bezahlt wurde.
+\end{itemize}
+
+\noindent \textbf{Invoice Line}
+\begin{itemize}
+    \item Header No. (PK) - Gibt die Rechnungsnummer an.
+    \item Line No. (PK) -  Jeder Rechnungsposten braucht eine eindeutige Nummer.
+    \item Item No. (FK: Item.No.) - Gibt die Artikelnummer des Rechnungspostens an.
+    \item Quantity - Gibt die Artikelmenge des Rechnungspostens an.
+    \item Price per unit - Gibt den Preis pro Einheit an.
+    \item Amount - Gibt die Gesamtsumme des Rechnungpostens an.
+\end{itemize}

@@ -1,0 +1,43 @@
+{% extends 'sus/base.html' %} 
+{% block title %}Home{% endblock %} 
+{% block content %}
+    
+    <link rel="stylesheet" href="/static/css/sus/home.css" />
+
+    <header>
+        <h2>
+            Home - {{ vendor["name"]}}
+        </h2>
+    </header>
+
+    <div class="home-content">
+        <div class="discounts">
+            <h4>
+                Vendor skonto:
+            </h4>
+            <p>
+                {{ "%.1f" % (vendor["discount"] / 10) + "%"}}
+            </p>
+        </div>
+        
+        <div class="order-history">
+            <table>
+                <caption>Order history</caption>
+                <tr>
+                    <th>InvoiceID</th>
+                    <th class="res-hide-640">Date</th>
+                    <th class="res-hide-460">Total price</th>
+                    <th></th>
+                </tr>
+                {% for invoice in invoices|reverse %}
+                <tr>
+                    <td>{{ invoice["invoice_id"] }}</td>
+                    <td class="res-hide-640">{{ invoice["date"].strftime('%Y-%m-%d, %H:%M') }}</td>
+                    <td class="res-hide-460">{{ "%.2f" % (invoice["total"] / 100) }} €</td>
+                    <td><a href="invoice?id={{ invoice["invoice_id"] }}">View invoice</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

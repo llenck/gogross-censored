@@ -1,0 +1,107 @@
+.container{
+  position: relative;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#popup {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+#popup button {
+  background-color: #161a30;
+  color: white;
+  border-radius: 10px;
+  padding: 0.5rem 0.5rem;
+}
+
+#saveNewCategory {
+  padding: 0.5rem 1rem;
+}
+
+body {
+  background-color: #b6bbc4;
+}
+
+.add-category{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.categoryliste {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-left: 2%;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.categoryList,
+.addCategory {
+  display: flex;
+  align-items: center;
+}
+
+#categoryList {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 2% 0;
+  padding-left: 0;
+  align-items: start;
+  justify-content: space-between;
+}
+
+#categoryList li {
+  padding: 0.5rem 1rem;
+  margin: 4% 0;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+#categoryList li button {
+  margin-left: 10px;
+  background: white;
+}
+
+.addCategory {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.addCategory button {
+  padding: 0.5rem 1rem;
+  background-color: #161a30;
+  border-radius: 20px;
+  color: white;
+}
+
+.submit-cancel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  margin: 10% 0 5% 0;
+}
+
+.submit-cancel button {
+  padding: 10px 30px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  background-color: #161a30;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+}

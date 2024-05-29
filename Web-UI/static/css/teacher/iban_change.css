@@ -1,0 +1,47 @@
+body {
+    background-color: #b6bbc4;
+}
+
+.main-content {
+    position: relative;
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#vendor-iban-change {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+p {
+    color: #161a30;
+    margin: 1rem;
+    font-weight: bold;
+}
+
+.submit-cancel {
+    display: flex;
+    width: 70%;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.submit-cancel button {
+    padding: 1rem 2rem;
+    margin-top: 1rem;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background-color: #161a30;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+}

@@ -1,0 +1,241 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #B6BBC4;
+    font-size: 20px;
+    color: #161A30;
+}
+
+.container {
+    flex: 1;
+    padding: 1rem;
+}
+
+.header {
+    width: 100%;
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.header select {
+    font-size: large;
+    border-radius: 20px;
+    width: auto ;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    background-color: white;
+    color: #161A30;
+    margin: 0;
+    font-weight: bold;
+    padding: 1rem;
+} 
+
+.header select:hover {
+    background-color: #d2d2d2;
+    transition: 0.5s;
+}
+
+h1, h2, h3, h4, p, a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    margin: 0 0 0 1%;
+}
+
+p {
+    margin: 0 0 0 1%;
+  font-size: 18px;
+  width: 55%;
+  height: 50%;
+  word-wrap: break-word;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+h1, h3 {
+    font-weight: bolder;
+}
+
+.products {
+    margin: 1rem;
+    align-items: center;
+}
+
+.product {
+    border-radius: 20px;
+    margin: 1rem;
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    height: 30vh;
+}
+
+.product_picture {
+    width: 25%;
+}
+
+.product_picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 20px;
+}
+
+.product_information {
+    width: 100%;
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.product_information p {
+    word-wrap: break-word;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.add_product {
+    width: 50%;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.add_info h1 {
+    padding: 0.5rem;
+}
+
+.add_action {
+    padding: 0.5rem;
+    display: flex;
+}
+
+.down {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    background: transparent;
+    border: 2px #161A30 solid;
+    border-radius: 20px;
+    color: #161A30;
+    cursor: pointer;
+}
+
+.up {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    background: transparent;
+    border: 2px #161A30 solid;
+    border-radius: 20px;
+    color: #161A30;
+    cursor: pointer;
+}
+
+.quantity {
+    border: 2px #161A30 solid;
+    border-radius: 20px;
+    width: 70px;
+    height: 40px;
+    text-align: center;
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+input[type="number"] {
+    -webkit-appearance: textfield;
+       -moz-appearance: textfield;
+            appearance: textfield;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+-webkit-appearance: none;
+}
+
+.btn_add {
+    border-radius: 20px;
+    margin-left: 1rem;
+    padding: 0 1rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    background-color: #161A30;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    width: auto;
+    height: 40px;
+}
+
+@media only screen and (max-width: 1240px) {
+
+    .product_information p {
+        width: 10em;
+    }
+} 
+
+
+@media only screen and (max-width: 768px) {
+
+    .header {
+        text-align: center;
+        margin: 0;
+    }
+    
+
+    .products {
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    .product {
+        border-radius: 20px;
+        margin: 1rem auto;
+        background-color: white;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        padding: 0;
+        width: 100%;
+        display: flex;
+        height: 50vh;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product_picture {
+        height: 35%;
+        width: 100%;
+        padding: 0.75rem;
+    }
+
+    .product_picture img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 20px;
+    }
+
+    .product_information {
+        height: 100%;
+        padding: 1rem;
+        position: relative;
+        overflow: hidden;
+    }
+}

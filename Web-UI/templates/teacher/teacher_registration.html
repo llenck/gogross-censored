@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href=../../static/css/teacher/login.css />
+
+    <title>Registration</title>
+</head>
+<body>
+    <div class="container-fluid bg-white">
+        <div class="row">
+            <div class="col">
+                <h3 class="font-weight-bold">Teacher Registration</h3>
+                    <form action="" method="post">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name">
+
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email">
+
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password">
+
+                        <label for="repeat_password">Repeat Password</label>
+                        <input type="password" name="repeat_password" id="repeat_password">
+
+                        <label for="country">Country</label>
+                        <select class="bg-white " name="country" id="country">
+                            {% for country in eu_laender %}  <!--Benötigt Liste von Ländern-->
+                            <option value="{{ country["Kürzel"] }}">{{ country["Land"] }}</option>
+                            {% endfor %}
+                        </select>
+                        <input class="w-75 text-white" type="submit" value="Register">
+                    </form>
+                <a href="/">Already have an account?</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

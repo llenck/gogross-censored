@@ -1,0 +1,63 @@
+{% extends 'sus/base.html' %}
+{% block title %}Catalog{% endblock %}
+{% block content %}
+
+<link rel="stylesheet" href="/static/css/sus/catalog.css" />
+
+<div class="header">
+    <select name="categories" id="category" onchange="window.location.href=this.value;">
+        <option value="catalog" 
+                {% if request.args.get('category')  == None %} selected="selected" {% endif %}
+                >All Products</option>
+        
+        {% for category in categories %}
+        <option value="catalog?category={{ category["id"] }}" 
+                {% if (category["id"] | string()) == request.args.get('category') %} selected="selected" {% endif %}
+                >{{ category["name"] }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+{% if request.args.get('category') != None %}
+{% set products = products | selectattr("category", "equalto", request.args.get('category') | int()) %}
+{% endif %}
+{% for product in products %}
+<div class="products">
+    <div class="product">
+        <div class="product_picture">
+            <img src="img?product={{ product["id"] }}" alt="No image">
+        </div>
+        <div class="product_information">
+            <h3>
+                {{ product["name"] }}
+            </h3>
+            <h4>
+                {{ product["manufacturer"] }}
+            </h4>
+            <h3>
+                Art-Nr: {{ product["canon_id"] }}
+            </h3>
+            <p>
+                Description: {{ product["description"] }}
+            </p>
+        </div>
+        <div class="add_product">
+            <div class="add_info">
+                <h1>
+                    {{ "%.2f" % (product["price"] / 100)}}€
+                </h1>
+            </div>
+            <div class="add_action">   
+                <button class="down" onclick="quantity_{{ product["id"] }}.stepDown()">-</button>
+                <form action="add-to-cart{% if request.args.get('category') != None %}?return-cat={{ request.args.get('category') }}{% endif %}" method="POST" id="add_form_{{ product["id"] }}">
+                    <input type="hidden" name="product_id" value="{{ product["id"]}}" />
+                    <input class="quantity" type="number" name="quantity" id="quantity_{{ product["id"] }}" value="1" min="1">
+                </form>
+                <button class="up" onclick="quantity_{{ product["id"] }}.stepUp(); event.preventDefault()">+</button>
+                <button class="btn_add" type="submit" form="add_form_{{ product["id"] }}">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,127 @@
+Für Spielleiter:
+TODO: über http oder andere api? ist ja eh über eine shell auf dem Server.
+tendenziell shell.
+
+IDs, die composite PKs entsprechen, werden wie folgt kodiert:
+	urlsafe_base64(JSON.dumps([wert-1, wert-2, ...]))
+
+nach https://developer.mozilla.org/en-US/docs/Glossary/Base64 oder so
+
+Für Lehrkräfte:
+
+/register/<deeplink>
+	GET: formular zum registrieren.
+	POST: JSON mit gewünschten zugangsdaten. bei erfolg weiterleitung auf / mit popup gesetzt.
+
+/?[&popup=<TEXT>]
+	GET: lehrer-login-form.
+	POST: JSON mit email/passwort. bei erfolg weiterleitung auf dashboard
+
+/pw-reset
+	GET: formular zum email eingeben.
+	POST: JSON, was die email enthält, für die das passwort zurückgesetzt werden soll. Danach weiterleitung zu /
+TODO: api wo pw-reset-links aus emails hinführen
+
+
+/dashboard?[shop=<ID>]
+	GET: HTML fürs dashboard. Falls shop-parameter vorhanden, wird auf den shop gefiltert, sonst werden alle angezeigt.
+	POST: JSON, was sachen als bezahlt/unbezahlt markiert
+
+
+/products?shop=<ID>[&category=<ID>][&popup=<TEXT>]
+	GET: zeigt produktliste von einem shop an, in lehrer-sicht. Falls popup gegeben, wird 
+
+/products/img?product=<ID>
+	GET: gibt bild für produkt zurück. NOTE: backend muss gucken ob produkt zum land der lehrkraft passt.
+
+/products/export?products=IDa[,IDb,...]
+	GET: exportiert produkte als JSON (ohne interne IDs). NOTE: backend muss gucken ob produkte aus land von lehrkraft.
+
+/products/import?shop=<ID>
+	POST: JSON-array der produkte
+
+/products/add?shop=<ID>
+	GET: formular für den kram.
+	POST: JSON, was ein produkt repräsentiert. Nutzer wird bei erfolg weitergeleitet auf /products.
+
+/products/del?shop=<ID>
+	GET: formular für den kram.
+	POST: JSON, was ein produkt repräsentiert (vendor name, category name, no.). Nutzer wird bei erfolg weitergeleitet auf /products.
+
+
+/category-management?shop=<ID>[&popup=<TEXT>]
+	GET: zeigt kategore-management-ding
+	POST: JSON mit liste an additions und deletions. weiterleitung auf dieselbe seite mit popup.
+
+
+/administration?[popup=<TEXT>]
+	GET: gibt administration-overview-dings. Deeplink für SuS-registration ist schon drin, wird aber nicht angezeigt bis man auf den button klickt.
+
+/administration/add-vendor
+	GET: zeigt formular für vendor hinzufügen an.
+	POST: JSON, das den vendornamen angibt. Danach weiterleitung auf /administration.
+
+/administration/import-vendor
+	POST: JSON, was vendor angibt, ohne interne ID, da die der server generiert. danach weiterleitung auf /administration.
+
+/administration/export-vendor?shop=<ID>
+	GET: gibt JSON zurück, was den vendor repräsentiert (auch ohne ID) und leitet auf /administration weiter.
+
+/administration/delete-vendor
+	POST: JSON mit vendor-ID (string). löscht vendor, und leitet auf /administration weiter.
+
+/administration/change-iban?shop=<ID>
+	GET: zeigt formular für iban ändern an.
+	POST: JSON, was als einzelnen key die neue iban angibt. leitet auch auf /administration weiter.
+
+
+Für SuS:
+Für alles von hier bis inkl. pw-reset _keine_ extra Grafiken machen, sondern in der Entwurfsdoku darauf hinweisen dass es quasi dasselbe ist wie bei den Lehrkräften.
+
+/<deeplink>
+	GET: großhändlerliste, je nach land vom zugehörigen deeplink
+
+/<deeplink>/register?shop=<ID>
+	GET: formular für registrierung.
+	POST: JSON, was gewünschte zugangsdaten enthält. bei erfolg weiterleitung auf /<dl>/
+
+/<deeplink>/login?shop=<ID>[&popup=<TEXT>]
+	GET: großhändler-login-formular.
+	POST: zugangsdaten als JSON. beim fehler weiterleitung auf denselben link mit popup gesetzt, sonst shop-home.
+
+/<deeplink>/pw-reset?shop=<ID>
+	GET: formular zum email eingeben.
+	POST: JSON, was die email enthält, für die das passwort zurückgesetzt werden soll. Danach weiterleitung zu /<dl>/login
+
+/<deeplink>/home
+	GET: zeigt liste an invoices und potentiell rabatte an.
+
+/<deeplink>/invoice?id=<ID>
+	GET: zeigt invoice als PDF an.
+
+/<deeplink>/catalog?[category=<ID>][&popup=<TEXT>]
+	GET: zeigt produktliste an.
+
+/<deeplink>/img?product=<ID>
+	GET: zeigt produktbild an. NOTE: server muss gucken, ob produkt im land vom SuS verfügbar.
+
+/<deeplink>/add-to-cart?[return-cat=<ID>]
+	POST: JSON, was produkt-PK & anzahl angibt. danach weiterleitung zum katalog, mit optional kategorie, und definitiv popup.
+
+/<deeplink>/car?[popup=<TEXT>]
+	GET: zeigt warenkorb an.
+
+/<deeplink>/del-from-cart
+	POST: JSON, was produkt-PK angibt. danach weiterleitung zu /cart mit popup.
+
+/<deeplink>/checkout
+	POST: leeres JSON-objekt (`{}`). danach weiterleitung zu erstellten invoice, wobei mit JS noch /<dl>/home in die history gepusht wird, sodass man beim zurück-button da landet.
+
+
+Sonstiges:
+
+/error?msg=<MSG>&return=<URL>
+	GET: zeigt gegebene nachricht an. Es gibt einen "return"-Button, der auf die gg. URL weiterleitet.
+
+/logout[?return=<URL>]
+	GET: löscht alle cookies. idk ob über HTTP oder js (lieber http, damit wir cookies HTTPOnly machen können, wenn das geht) implementiert bis jetzt mit http

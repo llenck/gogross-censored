@@ -1,0 +1,38 @@
+\section{Testfälle für den Akteur Spielleiter}
+\begin{tabularx}{\textwidth}{|l|X|X|X|}
+	\hline
+	\textbf{AF ID} & \textbf{Voraussetzung} & \textbf{Test-Schritte} & \textbf{Erwartetes Ergebnis} \\ \hline
+	PE & - & Erstellung eines Planspiels. & Das Planspiel ist erstellt. \\ \hline
+	ULE & - & Generierung einer Registrierungs-URL. & Die generierte URL führt zu einer Webseite auf der sich Lehrer registrieren können. \\ \hline
+	ABE & - & Fordere Bestellungen an. & Alle Bestellungen sind vollständig für den Spielleiter sichtbar. \\ \hline
+	PLB & Ein Planspiel existiert & Lösche das Planspiel & Das alte Planspiel existiert nicht mehr \\ \hline
+	EP/IP & - & Spielleiter exportiert Planspiel. Spielleiter importiert den gerade generierten export. & Das betroffene Planspiel ist dupliziert. \\ \hline
+\end{tabularx}
+
+\newpage
+\section{Testfälle für den Akteur Lehrer}
+\begin{tabularx}{\textwidth}{|l|X|X|X|}
+	\hline
+	\textbf{AF ID} & \textbf{Voraussetzung} & \textbf{Test-Schritte} & \textbf{Erwartetes Ergebnis} \\ \hline
+	RGL & Ein gültiger Deeplink existiert. & Durchführung der Registrierung. Gefolgt von Login-Versuch. & Die Lehrkraft ist eingeloggt. \\ \hline
+	GH & Lehrkraft ist eingeloggt & Lehrer fügt Großhändler hinzu. & Großhändler ist in der jeweiligen Landesübersicht sichtbar und hat keine Kategorien/Produkte. \\ \hline
+	DES & Lehrer ist eingeloggt. & Erstellung und öffnen eines SuS-Deeplinks. & Eine Großhändler-Übersicht des Landes der durchführenden Lehrkraft wird angezeigt. \\ \hline
+	EG/IG & Lehrer ist eingeloggt und hat Zugriff auf Großhändlerverwaltung. & Durchführung des Imports/Exports von Großhändlerdaten. & Großhändlerdaten sind korrekt importiert/exportiert. \\ \hline
+	PH/PL/KH/KB/KL & Lehrer ist eingeloggt und hat Zugriff auf Produktverwaltung. & Hinzufügen/Löschen von Produkten und Kategorien. & Produkte und Kategorien sind entsprechend hinzugefügt/gelöscht. \\ \hline
+	BV & Lehrer ist eingeloggt und hat Zugriff auf Bestellungsübersicht. & Anwählen ob bereits bezahlt wurde. & Bestellungen sind korrekt angezeigt und abgespeichert. \\ \hline
+\end{tabularx}
+
+\newpage
+\section{Testfälle für den Akteur SuS-Unternehmen}
+\begin{tabularx}{\textwidth}{|l|X|X|X|}
+	\hline
+	\textbf{AF ID} & \textbf{Voraussetzung} & \textbf{Test-Schritte} & \textbf{Erwartetes Ergebnis} \\ \hline
+	LOG & SuS-Unternehmen hat einen Account bei einem Großhändler. & Eingabe der Logindaten auf der entsprechenden Großhändler-Website. & SuS-Unternehmen ist erfolgreich eingeloggt und kann auf alle vorgesehenen Funktionen zugreifen. \\ \hline
+	FM & - & SuS-Unternehmen gibt auf einer Großhändler-Login-Seite nicht registrierte Accountdaten ein. & Eine Fehlermeldung wird angezeigt. \\ \hline
+	RGS & SuS-Unternehmen ist auf einer Großhändler-Registrierungs-Seite. & SuS-Unternehmen gibt gewünschte Accountdetails ein. SuS-Unternehmen versucht, sich mit denselben Daten beim selben Großhändler einzuloggen. & SuS-Unternehmen wird erfolgreich eingeloggt. \\ \hline
+	WH/WL & SuS-Unternehmen ist registriert und eingeloggt. & Füge Testprodukte hinzu und entferne einige wieder. & Alle hinzugefügten, aber nicht entfernten Produkte werden im Warenkorb angezeigt. \\ \hline
+	BEST/BE & SuS-Unternehmen ist registriert und eingeloggt. & Füge Produkte hinzu und führe eine Bestellung durch & Der Warenkorb ist nun leer. Per E-Mail wird eine Rechnung empfangen, die in derselben Form auch in der Bestellübersicht abrufbar ist. \\ \hline
+	GLA & Großhändler-URL existiert & Öffne Großhändler-URL & Alle Großhändler des eigenen Landes sind sichtbar. \\ \hline
+	PZ & Das SuS-Unternehmen hat einen Account bei einem Großhändler. & Das SuS-Unternehmen klickt auf der entsprechenden Großhändler-Login-Seite auf ``Passwort vergessen'' und bekommt eine E-Mail mit einem Zurücksetzungslink, den es öffnet. Auf der folgenden Website wird das neue Passwort eingegeben und bestätigt. & Das neue Passwort lässt sich beim betroffenen Großhändler zum Login verwenden, das alte aber nicht. \\ \hline
+
+\end{tabularx}

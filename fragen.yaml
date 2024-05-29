@@ -1,0 +1,14 @@
+Fragen an Kunden:
+- Eine website, wo man Planspiel/Großhändler auswählen kann?
+- Properties von SuS-Accounts:
+ - Passwörter automatisch generiert oder kann man sich setzen?
+ - Soll man e-mail-adressen an accs hinzufügen können?
+ - E-Mail verifizierung?
+ - Was für Unterschiede sollen die Schüler/Lehrer-Deeplinks haben? 
+ - Nur Regestrierung mittels DeepLink möglich?
+- Wie sollen wir e-mails verschicken? Bekommen wir dazu eine API?
+- Gibts Anforderungen für import/export von Großhändlern/Produkten?
+- Sind alle Lehrkräfte Spielleiter? (Punkt2, 3)
+- Nur Skonto oder weitere Rabatte (z.B. Mengenrabatte)?
+- Verkäufe verwalten? Angebote annehmen? (Lehrkräfte) 
+- Können wir von einer technisch versierten Person ausgehen, die die Software auf einem Server konfiguriert & den Lehrern ihre Zugangsdaten schickt?

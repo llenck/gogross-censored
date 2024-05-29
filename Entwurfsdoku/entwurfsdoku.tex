@@ -1,0 +1,119 @@
+\documentclass{report}
+
+\usepackage[utf8]{inputenc} % Charakter-Kodierung
+\usepackage[german]{babel} % Sprache
+
+\usepackage[table,xcdraw]{xcolor} % Tabellen Farben
+\usepackage{tabularx} % Dynamische Tabellenbreite
+\usepackage{tcolorbox} % Graue Boxen
+\usepackage{hyperref} % url Umgebung
+\usepackage{todonotes} % Notizen
+\usepackage{natbib} % Bibliographie
+\usepackage{fancyhdr} % Header und Footer
+\usepackage{multirow} % Multizeile
+\usepackage{geometry} % Page layout
+\usepackage{color} % Text Farben
+
+% Page layout
+\geometry{
+	bottom=3.5cm,
+	headheight=180pt
+}
+
+% Nummerierung der ersten Seiten verhindern
+\pagenumbering{gobble}
+
+% Bibstyle
+\bibliographystyle{plain}
+
+% Header / Footer
+\fancypagestyle{plain}{
+	\fancyhf{}% Clear header/footer
+	\fancyhead[R]{\includegraphics[width=4cm]{img/cau-logo-2017}} % Rechter header
+	\fancyhead[L]{\leftmark} % Linker header
+	\fancyfoot[R]{\thepage} % Rechter footer
+	\fancyfoot[L]{\includegraphics[width=1cm]{img/se-logo}} % Linker footer	
+}
+\pagestyle{plain}
+
+\renewcommand{\headrulewidth}{0.5pt} % Unnötige Informationen der Kapitelangabe
+\renewcommand{\footrulewidth}{0.2pt} % entfernen
+\renewcommand{\chaptermark}[1]{\markboth{{#1}}{}}
+
+
+
+
+% Zahlen für Fußnoten
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\renewcommand{\thempfootnote}{\arabic{mpfootnote}}
+
+%%%%% Ausfüllen %%%%%
+
+\newcommand{\gruppenname}{Gruppe WSP3 1}
+\newcommand{\projektname}{Projekt GoGross}
+\newcommand{\semester}{Wintersemester 2023/24}
+
+
+
+% Titelseite
+
+\title{
+	\vspace*{-3cm}
+	Entwurfsdokumentation\\
+	\projektname\\
+	-\\
+	\color{gray}
+	Softwareprojekt \semester\\
+	\gruppenname\\
+	\vspace*{5mm}
+	\includegraphics[width=\textwidth]{img/logo}
+}
+
+\author{
+	\begin{tabular}{r l@{\hspace{8\tabcolsep}} r} 
+		Lia & Lenckowski & \multirow{8}{*}{ \includegraphics{img/se-logo} } \\
+		Leon & Klausing \\
+		Matheus & Kolzarek \\
+		Noe & Baumann \\
+		Shutong & Sun \\
+		Til & Schmidt \\
+		Tjark-Morten & Thies \\
+		Yuri & Hassink \\
+	\end{tabular}
+}
+
+\date{\today}
+
+% Dokument
+
+\begin{document}
+	\maketitle
+	\tableofcontents 
+
+	\chapter{Einleitung}\label{chp:einleitung}
+	\pagenumbering{arabic} % Nummerierung starten
+	\thispagestyle{fancy}
+	\input{kapitel/einleitung}
+
+	\chapter{Team-Aufteilung}
+	\thispagestyle{fancy}
+	\input{kapitel/teamaufteilung}
+
+	\chapter{Komponentendiagramme}\label{chp:komponentendiagramme}
+	\thispagestyle{fancy}
+	\input{kapitel/komponentendiagramme}
+
+	\chapter{Verteilungsdiagramm}\label{chp:verteilungsdiagramm}
+	\thispagestyle{fancy}
+	\input{kapitel/verteilungsdiagramm}
+
+	\chapter{Klassendiagramme oder API-Beschreibung}\label{chp:klassendiagramme-api}
+	\thispagestyle{fancy}
+	\input{kapitel/klassendiagramme-oder-api}
+
+	\chapter{Sequenzdiagramme}\label{chp:sequenzdiagramme}
+	\thispagestyle{fancy}
+	\input{kapitel/sequenzdiagramme}
+
+	\pagenumbering{gobble} % Nummerierung deaktivieren
+\end{document}

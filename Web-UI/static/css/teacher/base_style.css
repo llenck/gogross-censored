@@ -1,0 +1,196 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+@import url('https://fonts.cdnfonts.com/css/red-hat-display');
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Red Hat Display', sans-serif;
+}
+
+body {
+  display: flex;
+}
+
+.header {
+  width: 100%;
+  padding: 0.5em 0 0.5em 0;
+}
+
+.container h2{
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  font-family: "DM Sans", sans-serif;
+  font-weight: bold;
+  color: #161a30;
+  margin: 0;
+}
+
+.header h2{
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  font-family: "DM Sans", sans-serif;
+  font-weight: bold;
+  color: #161a30;
+  margin: 0;
+}
+
+.container h4{
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  padding: 1.5rem 0 0 1.5rem;
+  font-family: "DM Sans", sans-serif;
+  font-weight: thin;
+  color: #161a30;
+}
+
+.header h4{
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  padding: 0 1rem;
+  font-family: "DM Sans", sans-serif;
+  font-weight: thin;
+  color: #161a30;
+}
+
+input {
+  border-radius: 15px;
+  border: none;
+  padding: 0.2rem;
+}
+
+
+/*
+label {
+   margin: 0.5rem; 
+}
+*/
+
+
+input[type="submit"] {
+  background-color: #161a30;
+  font-weight: bold;
+  border: none;
+  padding: 1% 4%;
+}
+
+/*
+input::placeholder {
+  text-align: center;
+}
+*/
+
+/* ---- Sidebar-Styles ----*/
+
+.sidebar {
+  position:fixed;
+  top:0;
+  left:0;
+  width: 108px;
+  min-width: 108px;
+  height: 100vh; /* 100% der Viewport-Höhe */
+  padding: 10px 27.2px;
+  color: #fff;
+  /* overflow-y: auto; */
+  transition: all 0.5s linear; /* Animationseffekt, wenn sich die Breite des Containers ändert */
+  background: #161a30;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar:hover {
+  width: 250px;
+  min-width: 250px;
+  transition: all 0.5s linear;
+}
+
+.icon {
+  height: 20%; /* Höhe des Logos */
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+}
+
+.sidebar .icon img {
+  width: 100%;
+  height: 100%;
+  opacity: 0;  /* Logo ist standardmäßig unsichtbar */
+  transition: opacity 0.5s ease; 
+  object-fit: contain;
+}
+
+.sidebar:hover .icon img {
+  opacity: 1; /* Logo wird sichtbar, wenn über Sidebar gehovert wird */
+}
+
+
+.menu {
+  flex: 1;
+  position: relative; /* Positionierung relativ zu Elementen */
+  list-style: none; /* Entfernt die Aufzählungszeichen */
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 1rem; /* Abstand zwischen den Menüpunkten */
+  margin: 8px 0; /* Grauer Hintergrundbreite von dem ausgewählten Element */
+  border-radius: 8px;
+  transition: all 0.5s ease-in-out;
+}
+
+.sidebar li:hover,
+.active {
+  /* Menüpunkt, der gerade ausgewählt ist */
+  background-color: #e0e0e058;
+}
+
+.sidebar a {
+  color: #fff;
+  font-size: 15px;
+  text-decoration: none;
+  display: flex; /* Elemente in einer Zeile anordnen */
+  align-items: center; /* Vertikale Ausrichtung */
+  gap: 1.5rem; /* 1.5rem = 24px Abstand zwischen dem Icon und Text*/
+}
+
+.sidebar a span {
+  overflow: hidden; /* Versteckt den Text, der über die Breite des Containers hinausgeht */
+}
+
+.sidebar a i {
+  font-size: 1.2rem;
+}
+
+.separator {
+  /* Logout und FAQ werden am unteren Rand des Containers angezeigt */
+  min-height: 70px;
+  list-style: none;
+}
+
+.layout {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  transition: all 0.5s ease-in-out; 
+}
+
+.container{
+  position: relative;
+}
+
+@media screen and (min-width: 250px) {
+  .layout {
+    padding-left: 250px;
+  }
+}

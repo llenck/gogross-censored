@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href=../../static/css/sus/list.css />
+    <title>Available Vendors</title>
+</head>
+<body>
+    <div class="container-fluid bg-white">
+        <div class="row">
+            <div class="col">
+                <div class="vendors"></div>
+                    <h1>Available Vendors</h1>
+                    {% for vendor in vendors %}       
+                        <div class="vendor">
+                            <div class="vendor_logo">
+                                <img src="vendor-logo?shop={{ vendor["id"] }}" alt="">
+                            </div>
+                            <div class="vendor_info">
+                                <h2>
+                                    {{ vendor["name"]}}
+                                </h2>
+                                <h3>
+                                    {% for category in vendor["categories"] %}
+                                        {{ category["name"] }}
+                                    {% endfor %}
+                                </h3>
+                            </div>
+                            <div class="buttons">
+                                <div class="btn_register">
+                                    <a href="register?shop={{ vendor["id"] }}">Registration</a>
+                                </div>
+                                <div class="btn_login">
+                                    <a href="login?shop={{ vendor["id"] }}">Login</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Get the messages from Flask and parse them as JSON
+        var messages = JSON.parse('{{ get_flashed_messages() | tojson | safe }}');
+
+        // Loop through the messages and display each one in an alert box
+        for (let msg of messages) {
+            alert(msg);
+        }
+    </script>
+</body>
+</html>

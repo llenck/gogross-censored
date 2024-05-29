@@ -1,0 +1,136 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #B6BBC4;
+    font-size: 20px;
+    color: #161A30;
+    overflow: hidden;
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.container h2 {
+    display: inline-block;
+}
+
+.container h4 {
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    width: 100%;
+    padding: 0.5em 0 0.5em 0;
+}
+
+header h2 {
+    font-family: "DM Sans", sans-serif;
+    font-weight: bold;
+    color: #161A30;
+    margin: 0;
+}
+
+header select {
+    border-radius: 20px;
+    height: 2em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    margin-left: 1.2%;
+    text-align-last: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    background-color: white;
+}
+
+.dash-content {
+    height: 100%;
+    padding: 1em;
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 3fr;
+    gap: 2%;
+    grid-template-areas: 
+    "orders customer graph"
+    "unpaid unpaid graph"
+    "invoices invoices invoices";
+}
+
+.total-orders {
+    background-color: white;
+    border-radius: 20px;
+    grid-area: orders;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.dash-content h4 {
+    font-family: "DM Sans", sans-serif;
+    font-weight: bold;
+}
+
+.total-customer {
+    background-color: white;
+    border-radius: 20px;
+    grid-area: customer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+
+.unpaid-orders {
+    background-color: white;
+    border-radius: 20px;
+    grid-area: unpaid;
+    color: #EB5757;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.unpaid-orders h4 {
+    color: #EB5757;
+}
+
+.graph {
+    background-color: white;
+    border-radius: 20px;
+    grid-area: graph;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    overflow: auto;
+}
+
+.invoices {
+    background-color: white;
+    border-radius: 20px;
+    grid-area: invoices;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    overflow-y: scroll;
+    margin-bottom: 2.5em;
+}
+
+.invoices table {
+    width: 100%;
+}
+
+.invoices th, .invoices td {
+    padding: 0.5em;
+    text-align: center;
+    border-bottom: 1px solid lightgray;
+}
+
